@@ -1,9 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-
-
-
-
 export default function App() {
   const [seconds, setSeconds] = useState(10);
   const [running, setRunning] = useState(false);
