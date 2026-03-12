@@ -1,18 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-let wakeLock = null;
 
-async function enableWakeLock() {
-  try {
-    wakeLock = await navigator.wakeLock.request("screen");
-  } catch (err) {
-    console.log(err);
-  }
-}
+
+
 
 export default function App() {
   const [seconds, setSeconds] = useState(10);
   const [running, setRunning] = useState(false);
+  const wakeLock = useRef(null);
 
   useEffect(() => {
     if (!running) return;
@@ -32,6 +27,14 @@ export default function App() {
 
     return () => clearInterval(interval);
   }, [running]);
+
+  async function enableWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request("screen");
+  } catch (err) {
+    console.log(err);
+  }
+}
 
   function beep(duration) {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
