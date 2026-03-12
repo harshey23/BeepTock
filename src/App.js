@@ -25,8 +25,8 @@ export default function App() {
   }, [running]);
 
   async function enableWakeLock() {
-  try {
-    wakeLock = await navigator.wakeLock.request("screen");
+  try {    
+    wakeLock.current = await navigator.wakeLock.request("screen");
   } catch (err) {
     console.log(err);
   }
